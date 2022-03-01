@@ -29,7 +29,9 @@ else:
 
 input_df = pd.read_csv(args.input_path, header=0)
 
-ids = input_df.id.astype(str).tolist()
+sp_ids = input_df.sp_id.astype(str).tolist()
+rp_ids = input_df.rp_id.astype(str).tolist()
+
 seeker_posts = input_df.seeker_post.astype(str).tolist()
 response_posts = input_df.response_post.astype(str).tolist()
 
@@ -42,11 +44,11 @@ empathy_classifier = EmpathyClassifier(device,
 output_file = codecs.open(args.output_path, 'w', 'utf-8')
 csv_writer = csv.writer(output_file, delimiter=',', quotechar='"')
 
-csv_writer.writerow(['id','seeker_post','response_post','ER_label','IP_label','EX_label', 'ER_rationale', 'IP_rationale', 'EX_rationale'])
+csv_writer.writerow(['sp_id','rp_id','seeker_post','response_post','ER_label','IP_label','EX_label', 'ER_rationale', 'IP_rationale', 'EX_rationale'])
 
 for i in range(len(seeker_posts)):
 	(logits_empathy_ER, predictions_ER, logits_empathy_IP, predictions_IP, logits_empathy_EX, predictions_EX, logits_rationale_ER, predictions_rationale_ER, logits_rationale_IP, predictions_rationale_IP, logits_rationale_EX,predictions_rationale_EX) = empathy_classifier.predict_empathy([seeker_posts[i]], [response_posts[i]])
 
-	csv_writer.writerow([ids[i], seeker_posts[i], response_posts[i], predictions_ER[0], predictions_IP[0], predictions_EX[0], predictions_rationale_ER[0].tolist(), predictions_rationale_IP[0].tolist(), predictions_rationale_EX[0].tolist()])
+	csv_writer.writerow([sp_ids[i], rp_ids[i], seeker_posts[i], response_posts[i], predictions_ER[0], predictions_IP[0], predictions_EX[0], predictions_rationale_ER[0].tolist(), predictions_rationale_IP[0].tolist(), predictions_rationale_EX[0].tolist()])
 
 output_file.close()

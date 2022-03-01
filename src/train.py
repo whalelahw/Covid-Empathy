@@ -105,11 +105,11 @@ Tokenize input
 '''
 tokenizer = RobertaTokenizer.from_pretrained('roberta-base', do_lower_case=True)
 
-tokenizer_RP = tokenizer.batch_encode_plus(df.response_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+tokenizer_RP = tokenizer.batch_encode_plus(df.response_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 input_ids_RP = torch.tensor(tokenizer_RP['input_ids'])
 attention_masks_RP = torch.tensor(tokenizer_RP['attention_mask'])
 
-tokenizer_SP = tokenizer.batch_encode_plus(df.seeker_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+tokenizer_SP = tokenizer.batch_encode_plus(df.seeker_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 input_ids_SP = torch.tensor(tokenizer_SP['input_ids'])
 attention_masks_SP = torch.tensor(tokenizer_SP['attention_mask'])
 
@@ -121,11 +121,11 @@ rationales = torch.stack(rationales, dim=0)
 
 
 if args.do_validation:
-	val_tokenizer_RP = tokenizer.batch_encode_plus(df_val.response_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+	val_tokenizer_RP = tokenizer.batch_encode_plus(df_val.response_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 	val_input_ids_RP = torch.tensor(val_tokenizer_RP['input_ids'])
 	val_attention_masks_RP = torch.tensor(val_tokenizer_RP['attention_mask'])
 
-	val_tokenizer_SP = tokenizer.batch_encode_plus(df_val.seeker_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+	val_tokenizer_SP = tokenizer.batch_encode_plus(df_val.seeker_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 	val_input_ids_SP = torch.tensor(val_tokenizer_SP['input_ids'])
 	val_attention_masks_SP = torch.tensor(val_tokenizer_SP['attention_mask'])
 
@@ -135,11 +135,11 @@ if args.do_validation:
 	val_rationales_trimmed = torch.tensor(df_val.rationale_labels_trimmed.values.astype(int))
 
 if args.do_test:
-	test_tokenizer_RP = tokenizer.batch_encode_plus(df_test.response_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+	test_tokenizer_RP = tokenizer.batch_encode_plus(df_test.response_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 	test_input_ids_RP = torch.tensor(test_tokenizer_RP['input_ids'])
 	test_attention_masks_RP = torch.tensor(test_tokenizer_RP['attention_mask'])
 
-	test_tokenizer_SP = tokenizer.batch_encode_plus(df_test.seeker_post, add_special_tokens=True,max_length=args.max_len, pad_to_max_length=True)
+	test_tokenizer_SP = tokenizer.batch_encode_plus(df_test.seeker_post, add_special_tokens=True,max_length=args.max_len, truncation=True, padding=True)
 	test_input_ids_SP = torch.tensor(test_tokenizer_SP['input_ids'])
 	test_attention_masks_SP = torch.tensor(test_tokenizer_SP['attention_mask'])
 
