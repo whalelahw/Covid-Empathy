@@ -65,6 +65,10 @@ We provide one month of collected data in [data/input_21_03.csv](data/input_21_0
 
 We also provide the 450 annotated collected examples in [data/OurAnnotations.csv](data/OurAnnotations.csv).
 
+## Data Analysis
+
+All data analysis can be found in the notebook [empathy_analysis](analysis/empathy_analysis.ipynb).
+
 ## Training Arguments
 
 The training script accepts the following arguments: 
