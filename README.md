@@ -96,3 +96,16 @@ do_test | `boolean` | `False` | If set True, compute results on the test data
 save_model | `boolean` | `False` | If set True, save the trained model  
 save_model_path | `str` | `""` | path to save model
 
+## Acknowledgement
+
+The training data and detector code is from this paper
+
+```bash
+@inproceedings{sharma2020empathy,
+    title={A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support},
+    author={Sharma, Ashish and Miner, Adam S and Atkins, David C and Althoff, Tim},
+    year={2020},
+    booktitle={EMNLP}
+}
+```
+
