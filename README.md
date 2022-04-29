@@ -2,18 +2,6 @@
 
 This course project is built on the code of "A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support".
 
-This repository contains codes and dataset access instructions for the [EMNLP 2020 publication](https://arxiv.org/pdf/2009.08441) on understanding empathy expressed in text-based mental health support.
-
-If this code or dataset helps you in your research, please cite the following publication:
-```bash
-@inproceedings{sharma2020empathy,
-    title={A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support},
-    author={Sharma, Ashish and Miner, Adam S and Atkins, David C and Althoff, Tim},
-    year={2020},
-    booktitle={EMNLP}
-}
-```
-
 ## Introduction
 
 Empathy is an integral aspect of human connection, moreover shared experiences form this emotional capability. The global pandemic created a unity unique throughout history, a shared global experience which may be a happenstance of a millennia. This study builds upon an existing empathy framework aiming to analyze different forms of empathetic responses in online communities, when expressing support for individuals dealing with COVID-19 stressors. By training an empathy detector with domain adaptation and comparing the expressed empathy in COVID and non-COVID contexts in active Online Mental Health Communities (OMHCs), we aim to analyze the difference in empathy expression patterns between posts from COVID-related vs COVID-unrelated contexts as well as the community impact. By analyzing 16-month data from the Pushshift Reddit dataset, we found there are significantly higher levels of empathy expression via emotional reactions and interpretations in COVID contexts, while less are expressed via exploration. Additionally, this positive empathetic shift has contributed to greater prosociality reflected by positive feedback from both the support seekers and community members.
