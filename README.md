@@ -1,4 +1,7 @@
-# Empathy in Text-based Mental Health Support
+# Understanding Empathetic Shifts During the COVID-19 Pandemic in Online Mental Health Communities
+
+This course project is built on the code of "A Computational Approach to Understanding Empathy Expressed in Text-Based Mental Health Support".
+
 This repository contains codes and dataset access instructions for the [EMNLP 2020 publication](https://arxiv.org/pdf/2009.08441) on understanding empathy expressed in text-based mental health support.
 
 If this code or dataset helps you in your research, please cite the following publication:
@@ -13,10 +16,8 @@ If this code or dataset helps you in your research, please cite the following pu
 
 ## Introduction
 
-We present a computational approach to understanding how empathy is expressed in online mental health platforms. We develop a novel unifying theoretically-grounded framework for characterizing the communication of empathy in text-based conversations. We collect and share a corpus of 10k (post, response) pairs annotated using this empathy framework with supporting evidence for annotations (rationales). We develop a multi-task RoBERTa-based bi-encoder model for identifying empathy in conversations and extracting rationales underlying its predictions. Experiments demonstrate that our approach can effectively
-identify empathic conversations. We further apply this model to analyze 235k mental health interactions and show that users do not self-learn empathy over time, revealing opportunities for empathy training and feedback.
+Empathy is an integral aspect of human connection, moreover shared experiences form this emotional capability. The global pandemic created a unity unique throughout history, a shared global experience which may be a happenstance of a millennia. This study builds upon an existing empathy framework aiming to analyze different forms of empathetic responses in online communities, when expressing support for individuals dealing with COVID-19 stressors. By training an empathy detector with domain adaptation and comparing the expressed empathy in COVID and non-COVID contexts in active Online Mental Health Communities (OMHCs), we aim to analyze the difference in empathy expression patterns between posts from COVID-related vs COVID-unrelated contexts as well as the community impact. By analyzing 16-month data from the Pushshift Reddit dataset, we found there are significantly higher levels of empathy expression via emotional reactions and interpretations in COVID contexts, while less are expressed via exploration. Additionally, this positive empathetic shift has contributed to greater prosociality reflected by positive feedback from both the support seekers and community members.
 
-For a quick overview, check out [bdata.uw.edu/empathy](http://bdata.uw.edu/empathy/). For a detailed description of our work, please read our [EMNLP 2020 publication](https://arxiv.org/pdf/2009.08441).
 
 ## Quickstart
 
@@ -28,13 +29,13 @@ $ pip install -r requirements.txt
 ```
 
 
-### 2. Prepare dataset
+### 2. Prepare training dataset
 A sample raw input data file is available in [dataset/sample_input_ER.csv](dataset/sample_input_ER.csv). This file (and other raw input files in the [dataset](dataset) folder) can be converted into a format that is recognized by the model using with following command:
 ```
 $ python3 src/process_data.py --input_path dataset/sample_input_ER.csv --output_path dataset/sample_input_model_ER.csv
 ```
 
-### 3. Training the model
+### 3. Training the detector model
 For training our model on the sample input data, run the following command:
 ```
 $ python3 src/train.py \
@@ -49,7 +50,7 @@ $ python3 src/train.py \
 
 **Note:** You may need to create an `output` folder in the main directory before running this command.
 
-### 4. Testing the model
+### 4. Testing the detector model and detect empathy on our data
 For testing our model on the sample test input, run the following command:
 ```
 $ python3 src/test.py \
@@ -59,6 +60,19 @@ $ python3 src/test.py \
 	--IP_model_path output/sample_IP.pth \
 	--EX_model_path output/sample_EX.pth
 ```
+
+### 5. Unsupervised Domain Adaptation
+As we mentioned in the paper, we do unsupervised domain adaptation by mask language modeling on unsupervised data:
+```
+$ python3 src/uda.py
+```
+It will automaticly save the checkpoints, which can be used in step 3. All hyperparameters are specified in src/uda.py.
+
+
+## Collected Data
+
+We provide one month of collected data in data/input_21_03.csv, the output of the empathy detector is data/output_21_03.csv.
+
 
 ## Training Arguments
 
@@ -80,20 +94,5 @@ test_path | `str` | `""` | path to input test data
 do_validation | `boolean` | `False` | If set True, compute results on the validation data
 do_test | `boolean` | `False` | If set True, compute results on the test data
 save_model | `boolean` | `False` | If set True, save the trained model  
-save_model_path | `str` | `""` | path to save model 
-
-
-## Dataset Access Instructions
-
-The Reddit portion of our collected dataset is available inside the [dataset](dataset) folder. The csv files with annotations on the three empathy communication mechanisms are `emotional-reactions-reddit.csv`, `interpretations-reddit.csv`, and `explorations-reddit.csv`. Each csv file contains six columns:
-```
-sp_id: Seeker post identifier
-rp_id: Response post identifier
-seeker_post: A support seeking post from an online user
-response_post: A response/reply posted in response to the seeker_post
-level: Empathy level of the response_post in the context of the seeker_post
-rationales: Portions of the response_post that are supporting evidences or rationales for the identified empathy level. Multiple portions are delimited by '|'
-```
-
-For accessing the TalkLife portion of our dataset for non-commercial use, please contact the TalkLife team [here](mailto:research@talklife.co). 
+save_model_path | `str` | `""` | path to save model
 
