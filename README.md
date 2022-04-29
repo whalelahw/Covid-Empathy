@@ -33,7 +33,8 @@ $ python3 src/train.py \
 	--lambda_EI=1.0 \
 	--lambda_RE=0.5 \
 	--save_model \
-	--save_model_path=output/sample_ER.pth
+	--save_model_path=output/sample_ER.pth \
+	--checkpoint_num 875
 ```
 
 **Note:** You may need to create an `output` folder in the main directory before running this command.
@@ -48,19 +49,21 @@ $ python3 src/test.py \
 	--IP_model_path output/sample_IP.pth \
 	--EX_model_path output/sample_EX.pth
 ```
+This will save the prediction in a output file, you can further use [eval.py](eval.py) to get metrics like accuracy and F1.
 
 ### 5. Unsupervised Domain Adaptation
 As we mentioned in the paper, we do unsupervised domain adaptation by mask language modeling on unsupervised data:
 ```
 $ python3 src/uda.py
 ```
-It will automaticly save the checkpoints, which can be used in step 3. All hyperparameters are specified in src/uda.py.
+It will automaticly save the checkpoints, which can be used in step 3. All hyperparameters are specified in [src/uda.py](src/uda.py).
 
 
-## Collected Data
+## Collected Data and Annotation
 
-We provide one month of collected data in data/input_21_03.csv, the output of the empathy detector is data/output_21_03.csv.
+We provide one month of collected data in [data/input_21_03.csv](data/input_21_03.csv), the output of the empathy detector is [data/output_21_03.csv](data/output_21_03.csv).
 
+We also provide the 450 annotated collected examples in [data/OurAnnotations.csv](data/OurAnnotations.csv).
 
 ## Training Arguments
 
